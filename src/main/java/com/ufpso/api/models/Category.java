@@ -16,4 +16,7 @@ public class Category {
     @Column(name = "category_name")
     private String categoryName;
 
+    public void updateCategory(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }

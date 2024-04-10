@@ -1,5 +1,6 @@
 package com.ufpso.api.services.servImpl;
 
+import com.ufpso.api.dtos.UpdateCategoryRequestDto;
 import com.ufpso.api.models.Category;
 import com.ufpso.api.repository.CategoryRepository;
 import com.ufpso.api.services.CategoryService;
@@ -18,7 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category getCategoryById(Long categoryId) {
-        return this.categoryRepository.findById(categoryId).orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+        return categoryRepository.findById(categoryId).orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
     }
 
     @Override
@@ -28,11 +29,14 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category createCategory(Category category) {
-        return null;
+        return categoryRepository.save(category);
     }
 
     @Override
-    public Category updateCategory(Long categoryId, Category category) {
-        return null;
+    public Category updateCategory(Long categoryId, UpdateCategoryRequestDto category) {
+        Category category1 = categoryRepository.findById(categoryId).orElseThrow(() -> new RuntimeException("La categoria que intentas actualizar no existe"));
+
+        category1.updateCategory(category.getCategoryName());
+        return categoryRepository.save(category1);
     }
 }
