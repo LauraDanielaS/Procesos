@@ -38,6 +38,16 @@ public class Article {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
+    public void updateArticle(String articleName, String articleDescription, BigDecimal articlePrice, Integer articleQuantityStock, String articleImage, String articleAdditionalNotes, Category category) {
+        this.articleName = articleName;
+        this.articleDescription = articleDescription;
+        this.articlePrice = articlePrice;
+        this.articleQuantityStock = articleQuantityStock;
+        this.articleImage = articleImage;
+        this.articleAdditionalNotes = articleAdditionalNotes;
+        this.category = category;
+    }
+
 }
 
 
