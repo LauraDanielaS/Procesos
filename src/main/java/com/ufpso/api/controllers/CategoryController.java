@@ -3,6 +3,7 @@ package com.ufpso.api.controllers;
 import com.ufpso.api.dtos.UpdateCategoryRequestDto;
 import com.ufpso.api.models.Category;
 import com.ufpso.api.services.CategoryService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,5 +50,13 @@ public class CategoryController {
     @PutMapping("/{categoryId}")
     public ResponseEntity<Category> updateCategoryById(@PathVariable("categoryId") Long categoryId, @RequestBody UpdateCategoryRequestDto category) {
         return ResponseEntity.ok(this.categoryService.updateCategory(categoryId, category));
+    }
+
+    /**
+     * Eliminar categoria por ID.
+     **/
+    @DeleteMapping
+    public ResponseEntity<HttpStatus> deleteCategoryById(@PathVariable("categoryId") Long categoryId){
+        return new  ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

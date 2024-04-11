@@ -39,4 +39,10 @@ public class CategoryServiceImpl implements CategoryService {
         category1.updateCategory(category.getCategoryName());
         return categoryRepository.save(category1);
     }
+
+    @Override
+    public void DeleteCategory(Long categoryId) {
+        Category category1 = categoryRepository.findById(categoryId).orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+        categoryRepository.deleteById(category1.getCategoryId());
+    }
 }
