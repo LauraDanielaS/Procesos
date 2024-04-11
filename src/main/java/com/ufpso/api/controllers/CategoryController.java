@@ -55,7 +55,7 @@ public class CategoryController {
     /**
      * Eliminar categoria por ID.
      **/
-    @DeleteMapping
+    @DeleteMapping("/{categoryId}")
     public ResponseEntity<HttpStatus> deleteCategoryById(@PathVariable("categoryId") Long categoryId){
         categoryService.deleteCategory(categoryId);
         return new  ResponseEntity<>(HttpStatus.NO_CONTENT);

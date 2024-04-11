@@ -43,4 +43,10 @@ public class ArticleServiceImpl implements ArticleService {
         );
         return articleRepository.save(article1);
     }
+
+    @Override
+    public void deleteArticleById(Long articleId) {
+        Article article1 = articleRepository.findById(articleId).orElseThrow(() -> new RuntimeException("Articulo no encontrado"));
+        articleRepository.deleteById(article1.getArticleId());
+    }
 }

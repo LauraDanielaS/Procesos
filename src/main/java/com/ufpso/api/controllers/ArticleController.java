@@ -54,4 +54,13 @@ public class ArticleController  {
         return ResponseEntity.ok(this.articleService.updateArticle(articleId, article));
     }
 
+    /**
+     * Eliminar artículos por ID.
+     **/
+    @DeleteMapping("/{articleId}")
+    public ResponseEntity<HttpStatus> deleteArticleById(@PathVariable("articleId") Long articleId){
+        articleService.deleteArticleById(articleId);
+        return new  ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }
