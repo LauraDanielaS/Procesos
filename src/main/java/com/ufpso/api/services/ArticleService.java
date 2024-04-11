@@ -1,5 +1,6 @@
 package com.ufpso.api.services;
 
+import com.ufpso.api.dtos.ArticleUpdateRequestDto;
 import com.ufpso.api.models.Article;
 
 import java.util.List;
@@ -12,6 +13,6 @@ public interface ArticleService {
 
     void createArticle(Article article);
 
-    Article updateArticle(Long articleId, Article article);
+    Article updateArticle(Long articleId, ArticleUpdateRequestDto article);
 
 }

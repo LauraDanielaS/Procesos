@@ -3,12 +3,14 @@ package com.ufpso.api.services.servImpl;
 import com.ufpso.api.dtos.ArticleUpdateRequestDto;
 import com.ufpso.api.models.Article;
 import com.ufpso.api.repository.ArticleRepository;
+import com.ufpso.api.services.ArticleService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ArticleServiceImpl {
+public class ArticleServiceImpl implements ArticleService {
+
     private final ArticleRepository articleRepository;
 
     public ArticleServiceImpl(ArticleRepository articleRepository) {
