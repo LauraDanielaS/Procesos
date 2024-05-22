@@ -48,7 +48,7 @@ public class ArticleUpdateRequestDto {
 
     @NotNull(message = "category is required")
     @JsonProperty("category_id")
-    private Category category_id;
+    private Category categoryId;
 
 }
 
