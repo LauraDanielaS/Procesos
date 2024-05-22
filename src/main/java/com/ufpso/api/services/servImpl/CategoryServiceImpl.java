@@ -29,9 +29,9 @@ public class CategoryServiceImpl implements CategoryService {
         return (List<Category>) categoryRepository.findAll();
     }
 
-    public Category createCategory(Category category) {
+    public void createCategory(Category category) {
         this.validateCategory(category.getCategoryName());
-        return categoryRepository.save(category);
+        categoryRepository.save(category);
     }
 
     public Category updateCategory(Long categoryId, UpdateCategoryRequestDto category) {

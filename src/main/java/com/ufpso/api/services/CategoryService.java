@@ -11,7 +11,7 @@ public interface CategoryService {
 
     List<Category> getAllCategory();
 
-    Category createCategory(Category category);
+    void createCategory(Category category);
 
     Category updateCategory(Long categoryId, UpdateCategoryRequestDto category);
 
