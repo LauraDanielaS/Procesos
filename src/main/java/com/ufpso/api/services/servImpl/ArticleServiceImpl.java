@@ -33,12 +33,12 @@ public class ArticleServiceImpl implements ArticleService {
         Article article1 = this.articleRepository.findById(articleId).orElseThrow(()-> new RuntimeException("Articulo no encontrado"));
 
         article1.updateArticle(
-                article.getArticleName(),
-                article.getArticleDescription(),
-                article.getArticlePrice(),
-                article.getArticleQuantityStock(),
-                article.getArticleImage(),
-                article.getArticleAdditionalNotes(),
+                article.getName(),
+                article.getDescription(),
+                article.getPrice(),
+                article.getQuantityStock(),
+                article.getImage(),
+                article.getAdditionalNotes(),
                 article.getCategory_id()
         );
         return articleRepository.save(article1);
