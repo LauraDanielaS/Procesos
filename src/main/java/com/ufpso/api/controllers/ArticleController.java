@@ -1,9 +1,15 @@
 package com.ufpso.api.controllers;
 
 
+import com.ufpso.api.Messages;
 import com.ufpso.api.dtos.ArticleUpdateRequestDto;
+import com.ufpso.api.dtos.GenericRequest;
+import com.ufpso.api.dtos.GenericResponse;
+import com.ufpso.api.dtos.Response;
 import com.ufpso.api.models.Article;
 import com.ufpso.api.services.ArticleService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,46 +27,32 @@ public class ArticleController  {
     }
 
 
-    /**
-     * Traer todos los artículos
-     **/
     @GetMapping
-    public ResponseEntity<List<Article>> getAllArticles() {
-        return ResponseEntity.ok(this.articleService.getAllArticle());
+    public GenericResponse<List<Article>> getAllArticles() {
+        return new GenericResponse<>(new Response<>(this.articleService.getAllArticle(), HttpStatus.OK.value()));
     }
 
-    /**
-     * Traer artículos por Id
-     **/
     @GetMapping("/{articleId}")
-    public ResponseEntity<Article> getArticleById(@PathVariable("articleId") Long articleId) {
-        return ResponseEntity.ok(this.articleService.getArticleById(articleId));
+    public GenericResponse<Article> getArticleById(@PathVariable("articleId") @Positive Long articleId) {
+        return new GenericResponse<>(new Response<>(this.articleService.getArticleById(articleId), HttpStatus.OK.value()));
     }
 
-    /**
-     * Guardar artículos.
-     **/
     @PostMapping
-    public ResponseEntity<HttpStatus> createArticle(@RequestBody Article article) {
-        this.articleService.createArticle(article);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<GenericResponse<?>> createArticle(@RequestBody @Valid GenericRequest<Article> article) {
+        this.articleService.createArticle(article.requestMessage().getData());
+        GenericResponse<?> response = new GenericResponse<>(new Response<>(Messages.ARTICLE_CREATED.getMessage(), HttpStatus.CREATED.value()));
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    /**
-     * Actualizar artículos por ID.
-     **/
     @PutMapping("/{articleId}")
-    public ResponseEntity<Article> updateArticleById(@PathVariable("articleId") Long articleId, @RequestBody ArticleUpdateRequestDto article) {
-        return ResponseEntity.ok(this.articleService.updateArticle(articleId, article));
+    public GenericResponse<Article> updateArticleById(@PathVariable("articleId") @Positive Long articleId, @RequestBody @Valid GenericRequest<ArticleUpdateRequestDto> article) {
+        return new GenericResponse<>(new Response<>(this.articleService.updateArticle(articleId, article.requestMessage().getData()), HttpStatus.OK.value()));
     }
 
-    /**
-     * Eliminar artículos por ID.
-     **/
     @DeleteMapping("/{articleId}")
-    public ResponseEntity<HttpStatus> deleteArticleById(@PathVariable("articleId") Long articleId){
+    public GenericResponse<?> deleteArticleById(@PathVariable("articleId") @Positive Long articleId) {
         articleService.deleteArticleById(articleId);
-        return new  ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new GenericResponse<>(new Response<>(Messages.ARTICLE_DELETE.getMessage(), HttpStatus.OK.value()));
     }
 
 }

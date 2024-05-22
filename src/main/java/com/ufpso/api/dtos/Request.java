@@ -10,11 +10,11 @@ import lombok.Data;
 public class Request<T> {
 
     @JsonProperty
-    @NotNull
+    @NotNull(message = "message id should not be null")
     private String messageID;
 
     @JsonProperty
-    @NotNull
+    @NotNull(message = "data should not be null")
     @Valid
     private T data;
 

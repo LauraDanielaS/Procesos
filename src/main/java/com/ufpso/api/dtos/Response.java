@@ -17,6 +17,9 @@ public class Response<T> {
     @JsonProperty
     private Integer statusCode;
 
+    public Response(T message, Integer statusCode) {
+        this(message, LocalDate.now(), statusCode );
+    }
     public Response(T message, LocalDate date, Integer statusCode) {
         this.message= message;
         this.date= date;
