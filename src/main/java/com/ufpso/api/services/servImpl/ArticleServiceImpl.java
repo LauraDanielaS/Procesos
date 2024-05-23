@@ -36,14 +36,14 @@ public class ArticleServiceImpl implements ArticleService {
 
     public void createArticle(Article article) {
         //Toca comentar la linea 38 para realizar las pruebas unitarias de ArticleServiceImpl
-//        categoryService.getCategoryById(article.getCategory().getCategoryId());
+        categoryService.getCategoryById(article.getCategory().getCategoryId());
         this.validateArticle(article.getName());
         articleRepository.save(article);
     }
 
     public Article updateArticle(Long articleId, ArticleUpdateRequestDto article) {
         //Toca comentar la linea 45 para realizar las pruebas unitarias de ArticleServiceImpl
-//        categoryService.getCategoryById(article.getCategoryId().getCategoryId());
+        categoryService.getCategoryById(article.getCategoryId().getCategoryId());
 
         Article article1 = this.articleRepository.findById(articleId).orElseThrow(()->  new NotFoundException(Messages.ARTICLE_NOT_FOUND.getMessage()));
 
