@@ -28,7 +28,7 @@ public class User implements UserDetails {
     private long id;
 
     @NotNull(message = "Please provide the full name")
-    @Size(min = 10, max = 200)
+    @Size(min = 10, max = 200, message = "Fullname must have a minimum of ten character and a maximum of 200 characters")
     private String fullName;
 
     @NotNull(message = "please provide the document")
@@ -50,7 +50,7 @@ public class User implements UserDetails {
     private String email;
 
     @NotNull(message = "please provide the password")
-    @Size(min = 8, max = 15)
+    @Size(min = 8)
     private String password;
 
     @Enumerated(EnumType.STRING)

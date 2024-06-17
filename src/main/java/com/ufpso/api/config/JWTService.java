@@ -16,13 +16,13 @@ import java.util.Map;
 
 @Service
 public class JWTService {
-    private static final String SECRET_KEY = "2208153513d489a979265575aa0dfd5bed7bd9588981bb60f4a5e19d02614433";
+    private static final String SECRET_KEY = "Y2xhdmUgc2VjcmV0YSBtdXkgcGVybyBtdXkgc2VndXJh";
     private static final long accessTokenValidity = 60*60*1000;//1 hour 36000 ms
-    public String getToken(UserDetails user){
-        return getToken(new HashMap<>(), user);
+    public String generateToken(UserDetails user){
+        return generateToken(new HashMap<>(), user);
     }
 
-    private String getToken(Map<String, Object> extraClaims, UserDetails user){
+    private String generateToken(Map<String, Object> extraClaims, UserDetails user){
         return Jwts.builder().
                 setClaims(extraClaims).
                 setSubject(user.getUsername()).

@@ -18,7 +18,8 @@ public enum Messages {
     CATEGORY_CREATED("Category successfully registered"),
 
     USER_EMAIL_EXISTS("The email is already registered"),
-    CREDENTIAL_INVALID("Incorrect credentials");
+    CREDENTIAL_INVALID("Incorrect credentials"),
+    USER_CREATED("User created successfully");
 
     private final String message;
 

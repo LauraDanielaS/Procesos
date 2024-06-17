@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
             throw new AuthenticationFailedException(Messages.CREDENTIAL_INVALID.getMessage());
         }
         UserDetails userDetails = user.get();
-        String token = jwtService.getToken(userDetails);
+        String token = jwtService.generateToken(userDetails);
         return AuthResponse.builder()
                 .token(token)
                 .build();

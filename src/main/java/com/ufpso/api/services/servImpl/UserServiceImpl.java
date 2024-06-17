@@ -5,6 +5,7 @@ import com.ufpso.api.exception.AlreadyExists;
 import com.ufpso.api.models.User;
 import com.ufpso.api.repository.UserRepository;
 import com.ufpso.api.services.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,9 +14,11 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     public final UserRepository userRepository;
+    public final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -24,6 +27,7 @@ public class UserServiceImpl implements UserService {
         if (userFindByEmail.isPresent()) {
             throw new AlreadyExists(Messages.USER_EMAIL_EXISTS.getMessage());
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 }
