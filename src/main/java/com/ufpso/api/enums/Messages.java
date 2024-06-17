@@ -1,4 +1,4 @@
-package com.ufpso.api;
+package com.ufpso.api.enums;
 
 import lombok.Getter;
 

@@ -1,6 +1,6 @@
 package com.ufpso.api.services.servImpl;
 
-import com.ufpso.api.Messages;
+import com.ufpso.api.enums.Messages;
 import com.ufpso.api.dtos.ArticleUpdateRequestDto;
 import com.ufpso.api.exception.AlreadyExists;
 import com.ufpso.api.exception.NotFoundException;

@@ -1,7 +1,7 @@
 package com.ufpso.api.controllers;
 
 
-import com.ufpso.api.Messages;
+import com.ufpso.api.enums.Messages;
 import com.ufpso.api.dtos.ArticleUpdateRequestDto;
 import com.ufpso.api.dtos.GenericRequest;
 import com.ufpso.api.dtos.GenericResponse;
