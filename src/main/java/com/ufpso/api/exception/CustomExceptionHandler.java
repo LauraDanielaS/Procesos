@@ -49,4 +49,14 @@ public class CustomExceptionHandler {
         );
     }
 
+    @ExceptionHandler(AuthenticationFailedException.class)
+    public ResponseEntity<GenericResponse<?>> handleAuthenticationFailed(AuthenticationFailedException authenticationFailedException) {
+        return new ResponseEntity<>(
+                new GenericResponse<>(
+                        new Response<>(authenticationFailedException.getMessage(), LocalDate.now(), HttpStatus.FORBIDDEN.value())
+                ), HttpStatus.FORBIDDEN
+        );
+    }
+
+
 }

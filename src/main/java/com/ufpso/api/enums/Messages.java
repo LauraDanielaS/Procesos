@@ -15,8 +15,10 @@ public enum Messages {
     CATEGORY_NOT_EXISTS("Category you are trying to update does not exist"),
     CATEGORY_DELETE_NOT_EXISTS("Category you are trying to removing does not exist"),
     CATEGORY_DELETE("Category successfully removing"),
-    CATEGORY_CREATED("Category successfully registered");
+    CATEGORY_CREATED("Category successfully registered"),
 
+    USER_EMAIL_EXISTS("The email is already registered"),
+    CREDENTIAL_INVALID("Incorrect credentials");
 
     private final String message;
 
