@@ -7,6 +7,7 @@ import com.ufpso.api.enums.Messages;
 import com.ufpso.api.exception.AuthenticationFailedException;
 import com.ufpso.api.models.User;
 import com.ufpso.api.repository.UserRepository;
+import com.ufpso.api.services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final JWTService jwtService;
     private final AuthenticationManager authenticationManager;
