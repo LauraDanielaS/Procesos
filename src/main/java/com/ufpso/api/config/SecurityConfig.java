@@ -1,5 +1,6 @@
 package com.ufpso.api.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ufpso.api.enums.Messages;
 import com.ufpso.api.exception.NotFoundException;
 import com.ufpso.api.repository.UserRepository;
@@ -24,6 +25,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.time.LocalDate;
+import java.util.HashMap;
+
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
@@ -45,7 +49,18 @@ public class SecurityConfig {
                                 (request, response, authException) -> {
                                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
                                 }
-                        )
+                        ).authenticationEntryPoint((request, response, authException) -> {
+                            HashMap<String,String> map = new HashMap<>();
+                            map.put("message","Unauthorized access");
+                            map.put("date", String.valueOf(LocalDate.now()));
+                            map.put("statusCode", String.valueOf(401));
+                            HashMap<String,HashMap<String, String>> map2 = new HashMap<>();
+                            map2.put("responseMessage", map);
+                            ObjectMapper mapper = new ObjectMapper();
+                            response.setStatus(401);
+                            response.setHeader("Content-Type", "application/json");
+                            response.getWriter().write(mapper.writeValueAsString(map2));
+                        })
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class)

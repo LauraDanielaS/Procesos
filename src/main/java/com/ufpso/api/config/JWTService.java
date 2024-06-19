@@ -1,10 +1,10 @@
 package com.ufpso.api.config;
 
-import com.ufpso.api.exception.AuthenticationFailedException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @Service
+@Slf4j
 public class JWTService {
     private static final String SECRET_KEY = "Y2xhdmUgc2VjcmV0YSBtdXkgcGVybyBtdXkgc2VndXJh";
     private static final long accessTokenValidity = 60*60*1000;//1 hour 36000 ms
@@ -44,7 +46,8 @@ public class JWTService {
 
             return new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
         } catch (JwtException e) {
-            throw new AuthenticationFailedException(e.getMessage());
+            log.error("{}", e.getMessage());
+            return null;
         }
     }
 }
